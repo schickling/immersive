@@ -13,5 +13,17 @@ var Places = {
 				positionR:[6.5, -9.5, 13.5],
 				rotationR:[-5.7, -2.9, 0]}
 			]
+	},
+	technopark: {
+		left: "images/technopark/left.jpg",
+		right: "images/technopark/right.jpg",
+		name: "Technopark",
+		frames:[]
+	},
+	swisscom: {
+		left: "images/swisscom/left.jpg",
+		right: "images/swisscom/right.jpg",
+		name: "Swisscom",
+		frames:[]
 	}
 }
