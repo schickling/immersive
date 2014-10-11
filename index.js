@@ -18,7 +18,8 @@ var renderer = new THREE.WebGLRenderer({
 renderer.setSize(width, height);
 renderer.autoClear = false;
 
-document.body.appendChild(renderer.domElement);
+var element = renderer.domElement;
+document.body.appendChild(element);
 
 //var parameters = {
 //minFilter: THREE.LinearFilter,
@@ -92,5 +93,25 @@ function resize() {
   renderer.setSize(width, height);
 
 }
+
+function fullscreen() {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  }
+}
+
+window.addEventListener('click', function() {
+  if (window.innerWidth === screen.width && window.innerHeight === screen.height) {
+    location.reload();
+  } else {
+    fullscreen();
+  }
+}, false);
 
 window.addEventListener('resize', resize, false);
