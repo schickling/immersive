@@ -50,6 +50,13 @@ var Places = {
     frames: [],
     thumbnail: "images/technoparknight/thumb.jpg"
   },
+  technoparknight2: {
+    left: "images/technoparknight2/left.jpg",
+    right: "images/technoparknight2/right.jpg",
+    name: "Technopark Night II",
+    frames: [],
+    thumbnail: "images/technoparknight2/thumb.jpg"
+  },
   hall: {
     left: "images/hall/left.jpg",
     right: "images/hall/right.jpg",
