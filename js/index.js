@@ -48,10 +48,6 @@ for (var i = place.frames.length - 1; i >= 0; i--) {
   }
   var right = [];
 
-  var middle = {
-
-  }
-
   for (var tex in frame.right) {
     right.push(THREE.ImageUtils.loadTexture(frame.right[tex]));
   }
