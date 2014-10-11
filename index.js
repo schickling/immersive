@@ -33,11 +33,15 @@ effect.setSize(width, height);
 renderer.setSize(width, height);
 
 effect.preLeftRender = function() {
-  material.map = leftTexture;
+	for(var i = meshes.length - 1; i >= 0; i--) {
+		meshes[i].beforeRenderLeft();	
+	}
 };
 
 effect.preRightRender = function() {
-  material.map = rightTexture;
+	for(var i = meshes.length - 1; i >= 0; i--) {
+		meshes[i].beforeRenderRight();	
+	}
 };
 
 var element = renderer.domElement;
@@ -56,20 +60,17 @@ element.height = height;
 //var leftBuffer = renderTarget;
 //var rightBuffer = renderTarget.clone();
 
+var meshes = [];
+
 var place = location.hash ? Places[location.hash.substring(2)] : Places.auditorium;
 
 var leftTexture = THREE.ImageUtils.loadTexture(place.left);
 var rightTexture = THREE.ImageUtils.loadTexture(place.right);
 
-var material = new THREE.MeshBasicMaterial({
-  map: leftTexture
-});
-var leftSphere = new THREE.Mesh(
-  new THREE.SphereGeometry(100, 20, 20),
-  material
-);
-leftSphere.scale.x = -1;
-scene.add(leftSphere);
+meshes.push(new StereoMesh(leftTexture, rightTexture, new THREE.SphereGeometry(100, 20, 20)));
+
+meshes[0].mesh.scale.x = -1;
+scene.add(meshes[0].mesh);
 
 //var controls = new THREE.OrbitControls(camera);
 //controls.noPan = true;

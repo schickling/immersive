@@ -11,8 +11,8 @@ function StereoMesh(leftTexture, rightTextue, geometry) {
 }
 
 StereoMesh.prototype.beforeRenderLeft = function() {
-	this.material.map = left;
+	this.material.map = this.left;
 }
 StereoMesh.prototype.beforeRenderRight = function() {
-	this.material.map = right;
+	this.material.map = this.right;
 }
