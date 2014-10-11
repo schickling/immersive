@@ -75,3 +75,22 @@ function render() {
   requestAnimationFrame(render);
 
 }
+
+function resize() {
+
+  width = window.innerWidth;
+  height = window.innerHeight;
+
+  halfWidth = width / 2;
+
+  dprHeight = height * dpr;
+  dprHalfWidth = halfWidth * dpr;
+
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(width, height);
+
+}
+
+window.addEventListener('resize', resize, false);
