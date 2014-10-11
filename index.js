@@ -2,6 +2,9 @@ var dpr = (window.devicePixelRatio) ? window.devicePixelRatio : 1;
 var width = window.innerWidth;
 var height = window.innerHeight;
 
+var dprHeight = height * dpr;
+var dprWidth = width * dpr;
+
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
@@ -13,14 +16,19 @@ var renderer = new THREE.WebGLRenderer({
 renderer.setSize(width, height);
 renderer.autoClear = false;
 
-effect = new THREE.OculusRiftEffect(renderer, {worldScale: 100});
-effect.setSize(width, height);
+effect = new THREE.OculusRiftEffect(renderer, {
+  worldScale: 100
+});
+
+effect.setSize(dprWidth, dprHeight);
+
 effect.preLeftRender = function() {
   material.map = leftTexture;
-}
+};
+
 effect.preRightRender = function() {
   material.map = rightTexture;
-}
+};
 
 var element = renderer.domElement;
 document.body.appendChild(element);
@@ -38,8 +46,8 @@ document.body.appendChild(element);
 
 
 
-var leftTexture = THREE.ImageUtils.loadTexture('images/map.jpg');
-var rightTexture = THREE.ImageUtils.loadTexture('images/map2.jpg');
+var leftTexture = THREE.ImageUtils.loadTexture('images/left.jpg');
+var rightTexture = THREE.ImageUtils.loadTexture('images/right.jpg');
 
 var material = new THREE.MeshBasicMaterial({
   map: leftTexture
@@ -81,6 +89,8 @@ function resize() {
   camera.updateProjectionMatrix();
 
   renderer.setSize(width, height);
+
+  effect.setSize(dprWidth, dprHeight);
 
 }
 
