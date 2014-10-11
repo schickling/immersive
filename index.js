@@ -31,12 +31,44 @@ var meshes = [];
 
 var place = location.hash ? Places[location.hash.substring(2)] : Places.auditorium;
 
-var leftTexture = THREE.ImageUtils.loadTexture(place.left);
-var rightTexture = THREE.ImageUtils.loadTexture(place.right);
+var leftTexture = [THREE.ImageUtils.loadTexture(place.left)];
+var rightTexture = [THREE.ImageUtils.loadTexture(place.right)];
 
 var sphere = new StereoMesh(leftTexture, rightTexture, new THREE.SphereGeometry(100, 20, 20));
-sphere.mesh.scale.x = -1;
+
+sphere.scaleLeft.x = -1;
+sphere.scaleRight.x = -1;
+
 meshes.push(sphere);
+
+var fframe
+
+for(var i = place.frames.length - 1; i >= 0; i--) {
+  var frame = place.frames[i];
+  
+  var left = [] 
+
+  for(var tex in frame.left) {
+    left.push(THREE.ImageUtils.loadTexture(frame.left[tex]));
+  }
+  var right = []
+
+  for(var tex in frame.right) {
+    right.push(THREE.ImageUtils.loadTexture(frame.right[tex]));
+  }
+
+  var frameMesh = new StereoMesh(left, right, new THREE.CircleGeometry(10, 20));
+  frameMesh.positionLeft = new THREE.Vector3(frame.positionL[0], frame.positionL[1], frame.positionL[2]);
+  frameMesh.rotationLeft = new THREE.Euler(frame.rotationL[0], frame.rotationL[1], frame.rotationL[2], "XYZ");
+  frameMesh.scaleLeft = new THREE.Vector3(frame.scaleL[0], frame.scaleL[1], frame.scaleL[2]);
+
+  frameMesh.positionRight = new THREE.Vector3(frame.positionR[0], frame.positionR[1], frame.positionR[2]);
+  frameMesh.rotationRight = new THREE.Euler(frame.rotationR[0], frame.rotationR[1], frame.rotationR[2], "XYZ");
+  frameMesh.scaleRight = new THREE.Vector3(frame.scaleR[0], frame.scaleR[1], frame.scaleR[2]);
+
+  meshes.push(frameMesh);
+  fframe = frameMesh;
+}
 
 meshes.forEach(function(m) {
   scene.add(m.mesh);
@@ -103,12 +135,64 @@ function fullscreen() {
   }
 }
 
-window.addEventListener('click', function() {
-  if (window.innerWidth === screen.width && window.innerHeight === screen.height) {
-    location.reload();
-  } else {
-    fullscreen();
-  }
-}, false);
+//window.addEventListener('click', function() {
+//  if (window.innerWidth === screen.width && window.innerHeight === screen.height) {
+//    location.reload();
+//  } else {
+//    fullscreen();
+//  }
+//}, false);
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 37) {
+      fframe.mesh.position.x += 0.5;
+    }
+    if(event.keyCode == 39) {
+      fframe.mesh.position.x -= 0.5;
+    }
+    if(event.keyCode == 38) {
+      fframe.mesh.position.z += 0.5;
+    }
+    if(event.keyCode == 40) {
+      fframe.mesh.position.z -= 0.5;
+    }
+
+    if(event.keyCode == 79) { //O
+      fframe.mesh.position.y += 0.5;
+    }
+    if(event.keyCode == 76) { //L
+      fframe.mesh.position.y -= 0.5;
+    }
+
+    if(event.keyCode == 65) { //A
+      fframe.mesh.rotation.y += 0.1;
+    }
+    if(event.keyCode == 68) { //D
+      fframe.mesh.rotation.y -= 0.1;
+    }
+
+    if(event.keyCode == 87) { //W
+      fframe.mesh.rotation.x += 0.1;
+    }
+    if(event.keyCode == 83) { //S
+      fframe.mesh.rotation.x -= 0.1;
+    }
+    if(event.keyCode == 81) { //Q
+      fframe.mesh.rotation.z += 0.1;
+    }
+    
+    if(event.keyCode == 69) { //E
+      fframe.mesh.rotation.z -= 0.1;
+    }
+    if(event.keyCode == 73) { //i
+      fframe.mesh.scale.z += 0.1;
+      fframe.mesh.scale.x += 0.1;
+      fframe.mesh.scale.y += 0.1;
+    }
+    if(event.keyCode == 75) { //k
+      fframe.mesh.scale.z -= 0.1;
+      fframe.mesh.scale.x -= 0.1;
+      fframe.mesh.scale.y -= 0.1;
+    }
+});
 
 window.addEventListener('resize', resize, false);

@@ -1,8 +1,17 @@
-function StereoMesh(leftTexture, rightTextue, geometry) {
-	this.left = leftTexture;
-	this.right = rightTexture;
+function StereoMesh(leftTextures, rightTextures, geometry) {
+	this.left = leftTextures;
+	this.right = rightTextures;
+	this.cleft = 0;
+	this.cright = 0;
+	this.rotationLeft = new THREE.Euler(0, 0, 0, "XYZ");
+	this.rotationRight = new THREE.Euler(0, 0, 0, "XYZ");
+	this.positionLeft = new THREE.Vector3(0, 0, 0);
+	this.positionRight = new THREE.Vector3(0, 0, 0);
+	this.scaleLeft = new THREE.Vector3(1, 1, 1);
+	this.scaleRight = new THREE.Vector3(1, 1, 1);
+	
 	this.material = new THREE.MeshBasicMaterial({
-		map: this.left		
+		map: this.left[0]
 	});
 	this.mesh = new THREE.Mesh(
 		geometry,
@@ -11,8 +20,22 @@ function StereoMesh(leftTexture, rightTextue, geometry) {
 }
 
 StereoMesh.prototype.beforeRenderLeft = function() {
-	this.material.map = this.left;
+	this.cleft += 1;
+	if(this.cleft / 20 >= this.left.length) {
+		this.cleft = 0;
+	}
+	this.material.map = this.left[Math.floor(this.cleft / 20)];
+	this.mesh.position = this.positionLeft;
+	this.mesh.rotation = this.rotationLeft;
+	this.mesh.scale = this.scaleLeft;
 }
 StereoMesh.prototype.beforeRenderRight = function() {
-	this.material.map = this.right;
+	this.cright += 1;
+	if(this.cright / 20 >= this.right.length) {
+		this.cright = 0;
+	}
+	this.material.map = this.right[Math.floor(this.cright / 20)];
+	this.mesh.position = this.positionRight;
+	this.mesh.rotation = this.rotationRight;
+	this.mesh.scale = this.scaleRight;
 }
