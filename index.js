@@ -1,4 +1,4 @@
-var DEBUG = true;
+var DEBUG = false;
 
 var dpr = Math.min(window.devicePixelRatio || 1, 2);
 var width = window.innerWidth;
@@ -19,9 +19,6 @@ renderer.autoClear = false;
 var pipeline = new THREE.StereoPipeline(renderer, dpr, width, height);
 
 renderer.setSize(width, height);
-
-var element = renderer.domElement;
-document.body.appendChild(element);
 
 var meshes = [];
 
@@ -78,18 +75,15 @@ if (DEBUG) {
   controls.noZoom = true;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.5;
+
+  document.addEventListener('keydown', moveFrame, false);
 } else {
   controls = new THREE.DeviceOrientationControls(camera, true);
   controls.connect();
   controls.update();
 
-  window.addEventListener('click', function() {
-    if (window.innerWidth === screen.width && window.innerHeight === screen.height) {
-      location.reload();
-    } else {
-      fullscreen();
-    }
-  }, false);
+  window.addEventListener('click', toggleFullscreen, false);
+  window.addEventListener('touchmove', reload, false);
 }
 
 var leftPrerender = function() {
@@ -125,19 +119,35 @@ function resize() {
 
 }
 
-function fullscreen() {
-  if (element.requestFullscreen) {
-    element.requestFullscreen();
-  } else if (element.msRequestFullscreen) {
-    element.msRequestFullscreen();
-  } else if (element.mozRequestFullScreen) {
-    element.mozRequestFullScreen();
-  } else if (element.webkitRequestFullscreen) {
-    element.webkitRequestFullscreen();
+function toggleFullscreen() {
+  if (document.mozFullScreen || document.webkitIsFullScreen) {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  } else {
+    if (element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen();
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen();
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen();
+    }
   }
 }
 
-document.addEventListener('keydown', function(event) {
+function reload() {
+  location.reload();
+}
+
+function moveFrame(event) {
   if (event.keyCode == 37) {
     fframe.mesh.position.x += 0.5;
   }
@@ -188,6 +198,9 @@ document.addEventListener('keydown', function(event) {
     fframe.mesh.scale.x -= 0.1;
     fframe.mesh.scale.y -= 0.1;
   }
-});
+};
 
 window.addEventListener('resize', resize, false);
+
+var element = renderer.domElement;
+document.body.appendChild(element);
