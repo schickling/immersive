@@ -1,4 +1,4 @@
-var DEBUG = true;
+var DEBUG = false;
 
 var dpr = window.devicePixelRatio || 1;
 var width = window.innerWidth;
@@ -85,6 +85,7 @@ function resize() {
   camera.updateProjectionMatrix();
 
   renderer.setSize(width, height);
+  pipeline.setSize(dpr, width, height);
 
   //element.width = width;
   //element.height = height;
