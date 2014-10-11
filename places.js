@@ -25,5 +25,11 @@ var Places = {
 		right: "images/swisscom/right.jpg",
 		name: "Swisscom",
 		frames:[]
+	},
+	hackzurich: {
+		left: "images/hackzurich/left.jpg",
+		right: "images/hackzurich/right.jpg",
+		name: "Swisscom",
+		frames:[]
 	}
 }
