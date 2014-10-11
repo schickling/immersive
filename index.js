@@ -1,12 +1,8 @@
-var DEBUG = false;
+var DEBUG = true;
 
-var dpr = window.devicePixelRatio || 1;
+var dpr = Math.min(window.devicePixelRatio || 1, 2);
 var width = window.innerWidth;
 var height = window.innerHeight;
-
-if (dpr > 2) {
-  console.log(dpr);
-}
 
 var scene = new THREE.Scene();
 
@@ -41,19 +37,19 @@ sphere.scaleRight.x = -1;
 
 meshes.push(sphere);
 
-var fframe
+var fframe;
 
-for(var i = place.frames.length - 1; i >= 0; i--) {
+for (var i = place.frames.length - 1; i >= 0; i--) {
   var frame = place.frames[i];
-  
-  var left = [] 
 
-  for(var tex in frame.left) {
+  var left = [];
+
+  for (var tex in frame.left) {
     left.push(THREE.ImageUtils.loadTexture(frame.left[tex]));
   }
-  var right = []
+  var right = [];
 
-  for(var tex in frame.right) {
+  for (var tex in frame.right) {
     right.push(THREE.ImageUtils.loadTexture(frame.right[tex]));
   }
 
@@ -86,6 +82,14 @@ if (DEBUG) {
   controls = new THREE.DeviceOrientationControls(camera, true);
   controls.connect();
   controls.update();
+
+  window.addEventListener('click', function() {
+    if (window.innerWidth === screen.width && window.innerHeight === screen.height) {
+      location.reload();
+    } else {
+      fullscreen();
+    }
+  }, false);
 }
 
 var leftPrerender = function() {
@@ -119,8 +123,6 @@ function resize() {
   renderer.setSize(width, height);
   pipeline.setSize(dpr, width, height);
 
-  //element.width = width;
-  //element.height = height;
 }
 
 function fullscreen() {
@@ -135,64 +137,57 @@ function fullscreen() {
   }
 }
 
-//window.addEventListener('click', function() {
-//  if (window.innerWidth === screen.width && window.innerHeight === screen.height) {
-//    location.reload();
-//  } else {
-//    fullscreen();
-//  }
-//}, false);
 document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 37) {
-      fframe.mesh.position.x += 0.5;
-    }
-    if(event.keyCode == 39) {
-      fframe.mesh.position.x -= 0.5;
-    }
-    if(event.keyCode == 38) {
-      fframe.mesh.position.z += 0.5;
-    }
-    if(event.keyCode == 40) {
-      fframe.mesh.position.z -= 0.5;
-    }
+  if (event.keyCode == 37) {
+    fframe.mesh.position.x += 0.5;
+  }
+  if (event.keyCode == 39) {
+    fframe.mesh.position.x -= 0.5;
+  }
+  if (event.keyCode == 38) {
+    fframe.mesh.position.z += 0.5;
+  }
+  if (event.keyCode == 40) {
+    fframe.mesh.position.z -= 0.5;
+  }
 
-    if(event.keyCode == 79) { //O
-      fframe.mesh.position.y += 0.5;
-    }
-    if(event.keyCode == 76) { //L
-      fframe.mesh.position.y -= 0.5;
-    }
+  if (event.keyCode == 79) { //O
+    fframe.mesh.position.y += 0.5;
+  }
+  if (event.keyCode == 76) { //L
+    fframe.mesh.position.y -= 0.5;
+  }
 
-    if(event.keyCode == 65) { //A
-      fframe.mesh.rotation.y += 0.1;
-    }
-    if(event.keyCode == 68) { //D
-      fframe.mesh.rotation.y -= 0.1;
-    }
+  if (event.keyCode == 65) { //A
+    fframe.mesh.rotation.y += 0.1;
+  }
+  if (event.keyCode == 68) { //D
+    fframe.mesh.rotation.y -= 0.1;
+  }
 
-    if(event.keyCode == 87) { //W
-      fframe.mesh.rotation.x += 0.1;
-    }
-    if(event.keyCode == 83) { //S
-      fframe.mesh.rotation.x -= 0.1;
-    }
-    if(event.keyCode == 81) { //Q
-      fframe.mesh.rotation.z += 0.1;
-    }
-    
-    if(event.keyCode == 69) { //E
-      fframe.mesh.rotation.z -= 0.1;
-    }
-    if(event.keyCode == 73) { //i
-      fframe.mesh.scale.z += 0.1;
-      fframe.mesh.scale.x += 0.1;
-      fframe.mesh.scale.y += 0.1;
-    }
-    if(event.keyCode == 75) { //k
-      fframe.mesh.scale.z -= 0.1;
-      fframe.mesh.scale.x -= 0.1;
-      fframe.mesh.scale.y -= 0.1;
-    }
+  if (event.keyCode == 87) { //W
+    fframe.mesh.rotation.x += 0.1;
+  }
+  if (event.keyCode == 83) { //S
+    fframe.mesh.rotation.x -= 0.1;
+  }
+  if (event.keyCode == 81) { //Q
+    fframe.mesh.rotation.z += 0.1;
+  }
+
+  if (event.keyCode == 69) { //E
+    fframe.mesh.rotation.z -= 0.1;
+  }
+  if (event.keyCode == 73) { //i
+    fframe.mesh.scale.z += 0.1;
+    fframe.mesh.scale.x += 0.1;
+    fframe.mesh.scale.y += 0.1;
+  }
+  if (event.keyCode == 75) { //k
+    fframe.mesh.scale.z -= 0.1;
+    fframe.mesh.scale.x -= 0.1;
+    fframe.mesh.scale.y -= 0.1;
+  }
 });
 
 window.addEventListener('resize', resize, false);
