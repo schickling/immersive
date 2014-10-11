@@ -1,6 +1,8 @@
 var dpr = (window.devicePixelRatio) ? window.devicePixelRatio : 1;
 var width = window.innerWidth;
 var height = window.innerHeight;
+var dprHeight = height * dpr;
+var dprWidth = width * dpr;
 
 var scene = new THREE.Scene();
 
@@ -10,11 +12,23 @@ camera.position.x = 0.1;
 var renderer = new THREE.WebGLRenderer({
   antialias: true
 });
-renderer.setSize(width, height);
+renderer.setSize(dprWidth, dprHeight);
 renderer.autoClear = false;
 
-effect = new THREE.OculusRiftEffect(renderer, {worldScale: 100});
-effect.setSize(width, height);
+var hmdOptions = {
+  hResolution : dprWidth,
+  vResolution : dprHeight,
+  hScreenSize: 0.14976,
+  vScreenSize: 0.0936,
+  interpupillaryDistance: 0.064,
+  lensSeparationDistance: 0.064,
+  eyeToScreenDistance: 0.041,
+  distortionK : [1.0, 0.22, 0.24, 0.0],
+  chromaAbParameter: [ 0.996, -0.004, 1.014, 0.0]
+};
+
+effect = new THREE.OculusRiftEffect(renderer, {worldScale: 100, HMD: hmdOptions});
+effect.setSize(dprWidth, dprHeight);
 effect.preLeftRender = function() {
   material.map = leftTexture;
 }
