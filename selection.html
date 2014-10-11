@@ -5,11 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Immersive</title>
-    <!--<link rel="stylesheet" href="vendor/bootstrap.min.css" type="text/css" charset="utf-8">-->
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" type="text/css" charset="utf-8">
     <!--<link rel="stylesheet" href="vendor/bootstrap-theme.min.css" type="text/css" charset="utf-8">-->
     <style>
-        html,
-        body {
+        * {
             padding: 0;
             margin: 0;
         }
@@ -21,10 +20,8 @@
     <div ng-controller="SelectionController">
         <div class="tile" ng-repeat="(placeId, place) in places">
             <a ng-href="/#/{{ placeId }}">
-                <img class="img-rounded" ng-src="{{ place.thumbnail }}" alt="...">
-                <!--<div class="caption">-->
-                <!--<h3>{{ place.name }}</h3> -->
-                <!--</div>-->
+                <img ng-src="{{ place.left }}" alt="...">
+                <div class="caption"><h2>{{ place.name }}</h2></div>
             </a>
         </div>
     </div>
