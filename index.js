@@ -1,7 +1,12 @@
 var DEBUG = true;
 
+var dpr = window.devicePixelRatio || 1;
 var width = window.innerWidth;
 var height = window.innerHeight;
+
+if (dpr > 2) {
+  console.log(dpr);
+}
 
 var scene = new THREE.Scene();
 
@@ -9,58 +14,18 @@ var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
 camera.position.x = 0.1;
 
 var renderer = new THREE.WebGLRenderer({
-  antialias: true
+  antialias: true,
+  devicePixelRatio: dpr
 });
 renderer.setSize(width, height);
 renderer.autoClear = false;
 
-var hmdOptions = {
-  hResolution: width,
-  vResolution: height,
-  hScreenSize: 0.14976,
-  vScreenSize: 0.0936,
-  interpupillaryDistance: 0.064,
-  lensSeparationDistance: 0.064,
-  eyeToScreenDistance: 0.041,
-  distortionK: [1.0, 0.22, 0.24, 0.0],
-  chromaAbParameter: [0.996, -0.004, 1.014, 0.0]
-};
-
-effect = new THREE.OculusRiftEffect(renderer, {
-  worldScale: 100,
-  HMD: hmdOptions
-});
-effect.setSize(width, height);
+var pipeline = new THREE.StereoPipeline(renderer, dpr, width, height);
 
 renderer.setSize(width, height);
 
-effect.preLeftRender = function() {
-  for (var i = meshes.length - 1; i >= 0; i--) {
-    meshes[i].beforeRenderLeft();
-  }
-};
-
-effect.preRightRender = function() {
-  for (var i = meshes.length - 1; i >= 0; i--) {
-    meshes[i].beforeRenderRight();
-  }
-};
-
 var element = renderer.domElement;
 document.body.appendChild(element);
-element.width = width;
-element.height = height;
-
-//var parameters = {
-//minFilter: THREE.LinearFilter,
-//magFilter: THREE.LinearFilter,
-//format: THREE.RGBFormat,
-//stencilBufferL: false
-//};
-
-//var renderTarget = new THREE.WebGLRenderTarget(0.5 * width, height, parameters);
-//var leftBuffer = renderTarget;
-//var rightBuffer = renderTarget.clone();
 
 var meshes = [];
 
@@ -69,10 +34,13 @@ var place = location.hash ? Places[location.hash.substring(2)] : Places.auditori
 var leftTexture = THREE.ImageUtils.loadTexture(place.left);
 var rightTexture = THREE.ImageUtils.loadTexture(place.right);
 
-meshes.push(new StereoMesh(leftTexture, rightTexture, new THREE.SphereGeometry(100, 20, 20)));
+var sphere = new StereoMesh(leftTexture, rightTexture, new THREE.SphereGeometry(100, 20, 20));
+sphere.mesh.scale.x = -1;
+meshes.push(sphere);
 
-meshes[0].mesh.scale.x = -1;
-scene.add(meshes[0].mesh);
+meshes.forEach(function(m) {
+  scene.add(m.mesh);
+});
 
 var controls;
 
@@ -88,16 +56,24 @@ if (DEBUG) {
   controls.update();
 }
 
+var leftPrerender = function() {
+  for (var i = meshes.length - 1; i >= 0; i--) {
+    meshes[i].beforeRenderLeft();
+  }
+};
+
+var rightPrerender = function() {
+  for (var i = meshes.length - 1; i >= 0; i--) {
+    meshes[i].beforeRenderRight();
+  }
+};
 
 render();
 
 function render() {
-
   controls.update();
-  effect.render(scene, camera);
-
+  pipeline.render(scene, camera, leftPrerender, rightPrerender);
   requestAnimationFrame(render);
-
 }
 
 function resize() {
@@ -108,12 +84,10 @@ function resize() {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
 
-  effect.setSize(width, height);
-
   renderer.setSize(width, height);
 
-  element.width = width;
-  element.height = height;
+  //element.width = width;
+  //element.height = height;
 }
 
 function fullscreen() {
