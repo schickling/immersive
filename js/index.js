@@ -1,6 +1,6 @@
 var DEBUG = false;
 
-var dpr = Math.min(window.devicePixelRatio || 1, 2);
+var dpr = Math.min(window.devicePixelRatio || 1, 3);
 var width = window.innerWidth;
 var height = window.innerHeight;
 
