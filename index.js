@@ -32,7 +32,8 @@ var hmdOptions = {
 
 effect = new THREE.OculusRiftEffect(renderer, {worldScale: 100, HMD: hmdOptions});
 effect.setSize(dprWidth, dprHeight);
-effect.setSize(dprWidth, dprHeight);
+
+renderer.setSize(width, height);
 
 effect.preLeftRender = function() {
   material.map = leftTexture;
@@ -97,13 +98,15 @@ function resize() {
   width = window.innerWidth;
   height = window.innerHeight;
 
+  dprWidth = width * dpr;
+  dprHeight = height * dpr;
+
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
 
-  renderer.setSize(width, height);
-
   effect.setSize(dprWidth, dprHeight);
 
+  renderer.setSize(width, height);
 }
 
 function fullscreen() {
