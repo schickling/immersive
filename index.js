@@ -2,11 +2,6 @@ var dpr = (window.devicePixelRatio) ? window.devicePixelRatio : 1;
 var width = window.innerWidth;
 var height = window.innerHeight;
 
-var halfWidth = width / 2;
-
-var dprHeight = height * dpr;
-var dprHalfWidth = halfWidth * dpr;
-
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
@@ -17,6 +12,15 @@ var renderer = new THREE.WebGLRenderer({
 });
 renderer.setSize(width, height);
 renderer.autoClear = false;
+
+effect = new THREE.OculusRiftEffect(renderer, {worldScale: 100});
+effect.setSize(width, height);
+effect.preLeftRender = function() {
+  material.map = leftTexture;
+}
+effect.preRightRender = function() {
+  material.map = rightTexture;
+}
 
 var element = renderer.domElement;
 document.body.appendChild(element);
@@ -62,16 +66,7 @@ render();
 function render() {
 
   controls.update();
-
-  // left eye
-  material.map = leftTexture;
-  renderer.setViewport(0, 0, dprHalfWidth, dprHeight);
-  renderer.render(scene, camera);
-
-  // right eye
-  material.map = rightTexture;
-  renderer.setViewport(dprHalfWidth, 0, dprHalfWidth, dprHeight);
-  renderer.render(scene, camera);
+  effect.render(scene, camera);
 
   requestAnimationFrame(render);
 
@@ -81,11 +76,6 @@ function resize() {
 
   width = window.innerWidth;
   height = window.innerHeight;
-
-  halfWidth = width / 2;
-
-  dprHeight = height * dpr;
-  dprHalfWidth = halfWidth * dpr;
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
