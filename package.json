@@ -1,0 +1,18 @@
+{
+  "name": "immersive",
+  "version": "0.0.0",
+  "description": "Virtual room tour using Google Cardboard",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/schickling/immersive"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/schickling/immersive/issues"
+  },
+  "homepage": "https://github.com/schickling/immersive"
+}
