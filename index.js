@@ -1,15 +1,24 @@
-var element = document.getElementById('sphere');
+var dpr = (window.devicePixelRatio) ? window.devicePixelRatio : 1;
 var width = window.innerWidth;
 var height = window.innerHeight;
+
+var halfWidth = width / 2;
+
+var dprHeight = height * dpr;
+var dprHalfWidth = halfWidth * dpr;
 
 var scene = new THREE.Scene();
 
 var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
 camera.position.x = 0.1;
 
-var renderer = new THREE.WebGLRenderer();
+var renderer = new THREE.WebGLRenderer({
+  antialias: true
+});
 renderer.setSize(width, height);
 renderer.autoClear = false;
+
+document.body.appendChild(renderer.domElement);
 
 //var parameters = {
 //minFilter: THREE.LinearFilter,
@@ -47,8 +56,6 @@ var controls = new THREE.DeviceOrientationControls(camera, true);
 controls.connect();
 controls.update();
 
-element.appendChild(renderer.domElement);
-
 render();
 
 function render() {
@@ -57,12 +64,12 @@ function render() {
 
   // left eye
   material.map = leftTexture;
-  renderer.setViewport(0, 0, width * 0.5, height);
+  renderer.setViewport(0, 0, dprHalfWidth, dprHeight);
   renderer.render(scene, camera);
 
   // right eye
   material.map = rightTexture;
-  renderer.setViewport(0.5 * width, 0, width * 0.5, height);
+  renderer.setViewport(dprHalfWidth, 0, dprHalfWidth, dprHeight);
   renderer.render(scene, camera);
 
   requestAnimationFrame(render);
