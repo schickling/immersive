@@ -1,12 +1,12 @@
 var DEBUG = false;
 
-var dpr = Math.min(window.devicePixelRatio || 1, 2);
+var dpr = Math.min(window.devicePixelRatio || 1, 3);
 var width = window.innerWidth;
 var height = window.innerHeight;
 
 var scene = new THREE.Scene();
 
-var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
+var camera = new THREE.PerspectiveCamera(105, (width / 2) / height, 1, 1000);
 camera.position.x = 0.1;
 
 var renderer = new THREE.WebGLRenderer({
@@ -111,7 +111,7 @@ function resize() {
   width = window.innerWidth;
   height = window.innerHeight;
 
-  camera.aspect = width / height;
+  camera.aspect = (width / 2) / height;
   camera.updateProjectionMatrix();
 
   renderer.setSize(width, height);
