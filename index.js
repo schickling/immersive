@@ -1,3 +1,5 @@
+var DEBUG = true;
+
 var width = window.innerWidth;
 var height = window.innerHeight;
 
@@ -33,15 +35,15 @@ effect.setSize(width, height);
 renderer.setSize(width, height);
 
 effect.preLeftRender = function() {
-	for(var i = meshes.length - 1; i >= 0; i--) {
-		meshes[i].beforeRenderLeft();	
-	}
+  for (var i = meshes.length - 1; i >= 0; i--) {
+    meshes[i].beforeRenderLeft();
+  }
 };
 
 effect.preRightRender = function() {
-	for(var i = meshes.length - 1; i >= 0; i--) {
-		meshes[i].beforeRenderRight();	
-	}
+  for (var i = meshes.length - 1; i >= 0; i--) {
+    meshes[i].beforeRenderRight();
+  }
 };
 
 var element = renderer.domElement;
@@ -72,15 +74,20 @@ meshes.push(new StereoMesh(leftTexture, rightTexture, new THREE.SphereGeometry(1
 meshes[0].mesh.scale.x = -1;
 scene.add(meshes[0].mesh);
 
-//var controls = new THREE.OrbitControls(camera);
-//controls.noPan = true;
-//controls.noZoom = true;
-//controls.autoRotate = true;
-//controls.autoRotateSpeed = 0.5;
+var controls;
 
-var controls = new THREE.DeviceOrientationControls(camera, true);
-controls.connect();
-controls.update();
+if (DEBUG) {
+  controls = new THREE.OrbitControls(camera);
+  controls.noPan = true;
+  controls.noZoom = true;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.5;
+} else {
+  controls = new THREE.DeviceOrientationControls(camera, true);
+  controls.connect();
+  controls.update();
+}
+
 
 render();
 
