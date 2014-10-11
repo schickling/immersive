@@ -1,4 +1,4 @@
-var DEBUG = false;
+var DEBUG = true;
 
 var dpr = Math.min(window.devicePixelRatio || 1, 3);
 var width = window.innerWidth;
