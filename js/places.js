@@ -37,5 +37,11 @@ var Places = {
 		right: "images/belmorepark/right.jpg",
 		name: "Belmorepark",
 		frames:[]
+	},
+	technoparknight: {
+		left: "images/technoparknight/left.jpg",
+		right: "images/technoparknight/right.jpg",
+		name: "Technopark Night",
+		frames:[]
 	}
 }
