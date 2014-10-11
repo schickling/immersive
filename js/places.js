@@ -12,42 +12,49 @@ var Places = {
 				scaleR:[0.9, 0.9, 0.89],
 				positionR:[6.5, -9.5, 13.5],
 				rotationR:[-5.7, -2.9, 0]}
-			]
+			],
+		thumbail: "images/auditorium/thumb.jpg"
 	},
 	technopark: {
 		left: "images/technopark/left.jpg",
 		right: "images/technopark/right.jpg",
 		name: "Technopark",
-		frames:[]
+		frames:[],
+		thumbail: "images/technopark/thumb.jpg"
 	},
 	swisscom: {
 		left: "images/swisscom/left.jpg",
 		right: "images/swisscom/right.jpg",
 		name: "Swisscom",
-		frames:[]
+		frames:[],
+		thumbail: "images/swisscom/thumb.jpg"
 	},
 	hackzurich: {
 		left: "images/hackzurich/left.jpg",
 		right: "images/hackzurich/right.jpg",
 		name: "Swisscom",
-		frames:[]
+		frames:[],
+		thumbail: "images/hackzurich/thumb.jpg"
 	},
 	belmorepark: {
 		left: "images/belmorepark/left.jpg",
 		right: "images/belmorepark/right.jpg",
 		name: "Belmorepark",
-		frames:[]
+		frames:[],
+		thumbail: "images/belmorepark/thumb.jpg"
 	},
 	technoparknight: {
 		left: "images/technoparknight/left.jpg",
 		right: "images/technoparknight/right.jpg",
 		name: "Technopark Night",
-		frames:[]
+		frames:[],
+		thumbail: "images/technoparknight/thumb.jpg"
 	},
 	hall: {
 		left: "images/hall/left.jpg",
 		right: "images/hall/right.jpg",
 		name: "Strange Hall",
-		frames:[]
+		frames:[],
+		thumbail: "images/hall/thumb.jpg"
 	}
 }
