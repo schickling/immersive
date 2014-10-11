@@ -23,7 +23,7 @@ renderer.setSize(width, height);
 var meshes = [];
 
 var placeId = location.hash.replace(/[#,\/]*/, '');
-if (!placeId) location.url = '/selection.html';
+if (!placeId) location.url = 'selection.html';
 var place = Places[placeId];
 
 var leftTexture = [THREE.ImageUtils.loadTexture(place.left)];
