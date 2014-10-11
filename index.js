@@ -1,5 +1,12 @@
+var DEBUG = true;
+
+var dpr = window.devicePixelRatio || 1;
 var width = window.innerWidth;
 var height = window.innerHeight;
+
+if (dpr > 2) {
+  console.log(dpr);
+}
 
 var scene = new THREE.Scene();
 
@@ -7,58 +14,18 @@ var camera = new THREE.PerspectiveCamera(75, width / height, 1, 1000);
 camera.position.x = 0.1;
 
 var renderer = new THREE.WebGLRenderer({
-  antialias: true
+  antialias: true,
+  devicePixelRatio: dpr
 });
 renderer.setSize(width, height);
 renderer.autoClear = false;
 
-var hmdOptions = {
-  hResolution: width,
-  vResolution: height,
-  hScreenSize: 0.14976,
-  vScreenSize: 0.0936,
-  interpupillaryDistance: 0.064,
-  lensSeparationDistance: 0.064,
-  eyeToScreenDistance: 0.041,
-  distortionK: [1.0, 0.22, 0.24, 0.0],
-  chromaAbParameter: [0.996, -0.004, 1.014, 0.0]
-};
-
-effect = new THREE.OculusRiftEffect(renderer, {
-  worldScale: 100,
-  HMD: hmdOptions
-});
-effect.setSize(width, height);
+var pipeline = new THREE.StereoPipeline(renderer, dpr, width, height);
 
 renderer.setSize(width, height);
 
-effect.preLeftRender = function() {
-	for(var i = meshes.length - 1; i >= 0; i--) {
-		meshes[i].beforeRenderLeft();	
-	}
-};
-
-effect.preRightRender = function() {
-	for(var i = meshes.length - 1; i >= 0; i--) {
-		meshes[i].beforeRenderRight();	
-	}
-};
-
 var element = renderer.domElement;
 document.body.appendChild(element);
-element.width = width;
-element.height = height;
-
-//var parameters = {
-//minFilter: THREE.LinearFilter,
-//magFilter: THREE.LinearFilter,
-//format: THREE.RGBFormat,
-//stencilBufferL: false
-//};
-
-//var renderTarget = new THREE.WebGLRenderTarget(0.5 * width, height, parameters);
-//var leftBuffer = renderTarget;
-//var rightBuffer = renderTarget.clone();
 
 var meshes = [];
 
@@ -71,26 +38,27 @@ var sphere = new StereoMesh(leftTexture, rightTexture, new THREE.SphereGeometry(
 
 sphere.scaleLeft.x = -1;
 sphere.scaleRight.x = -1;
+
 meshes.push(sphere);
 
 var fframe
 
 for(var i = place.frames.length - 1; i >= 0; i--) {
-	var frame = place.frames[i];
-	
-	var left = [] 
+  var frame = place.frames[i];
+  
+  var left = [] 
 
   for(var tex in frame.left) {
     left.push(THREE.ImageUtils.loadTexture(frame.left[tex]));
   }
-	var right = []
+  var right = []
 
   for(var tex in frame.right) {
     right.push(THREE.ImageUtils.loadTexture(frame.right[tex]));
   }
 
-	var frameMesh = new StereoMesh(left, right, new THREE.CircleGeometry(10, 20));
-	frameMesh.positionLeft = new THREE.Vector3(frame.positionL[0], frame.positionL[1], frame.positionL[2]);
+  var frameMesh = new StereoMesh(left, right, new THREE.CircleGeometry(10, 20));
+  frameMesh.positionLeft = new THREE.Vector3(frame.positionL[0], frame.positionL[1], frame.positionL[2]);
   frameMesh.rotationLeft = new THREE.Euler(frame.rotationL[0], frame.rotationL[1], frame.rotationL[2], "XYZ");
   frameMesh.scaleLeft = new THREE.Vector3(frame.scaleL[0], frame.scaleL[1], frame.scaleL[2]);
 
@@ -98,34 +66,46 @@ for(var i = place.frames.length - 1; i >= 0; i--) {
   frameMesh.rotationRight = new THREE.Euler(frame.rotationR[0], frame.rotationR[1], frame.rotationR[2], "XYZ");
   frameMesh.scaleRight = new THREE.Vector3(frame.scaleR[0], frame.scaleR[1], frame.scaleR[2]);
 
-	meshes.push(frameMesh);
+  meshes.push(frameMesh);
   fframe = frameMesh;
 }
 
+meshes.forEach(function(m) {
+  scene.add(m.mesh);
+});
 
-for(var i = meshes.length - 1; i >= 0; i--) {
-   scene.add(meshes[i].mesh);	
+var controls;
+
+if (DEBUG) {
+  controls = new THREE.OrbitControls(camera);
+  controls.noPan = true;
+  controls.noZoom = true;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 0.5;
+} else {
+  controls = new THREE.DeviceOrientationControls(camera, true);
+  controls.connect();
+  controls.update();
 }
 
-var controls = new THREE.OrbitControls(camera);
-controls.noPan = true;
-controls.noZoom = true;
-controls.autoRotate = false;
-controls.autoRotateSpeed = 0.5;
+var leftPrerender = function() {
+  for (var i = meshes.length - 1; i >= 0; i--) {
+    meshes[i].beforeRenderLeft();
+  }
+};
 
-//var controls = new THREE.DeviceOrientationControls(camera, true);
-//controls.connect();
-//controls.update();
+var rightPrerender = function() {
+  for (var i = meshes.length - 1; i >= 0; i--) {
+    meshes[i].beforeRenderRight();
+  }
+};
 
 render();
 
 function render() {
-
   controls.update();
-  effect.render(scene, camera);
-
+  pipeline.render(scene, camera, leftPrerender, rightPrerender);
   requestAnimationFrame(render);
-
 }
 
 function resize() {
@@ -136,12 +116,10 @@ function resize() {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
 
-  effect.setSize(width, height);
-
   renderer.setSize(width, height);
 
-  element.width = width;
-  element.height = height;
+  //element.width = width;
+  //element.height = height;
 }
 
 function fullscreen() {
@@ -167,40 +145,41 @@ document.addEventListener('keydown', function(event) {
     if(event.keyCode == 37) {
       fframe.mesh.position.x += 0.5;
     }
-    else if(event.keyCode == 39) {
+    if(event.keyCode == 39) {
       fframe.mesh.position.x -= 0.5;
     }
     if(event.keyCode == 38) {
       fframe.mesh.position.z += 0.5;
     }
-    else if(event.keyCode == 40) {
+    if(event.keyCode == 40) {
       fframe.mesh.position.z -= 0.5;
     }
 
     if(event.keyCode == 79) { //O
       fframe.mesh.position.y += 0.5;
     }
-    else if(event.keyCode == 76) { //L
+    if(event.keyCode == 76) { //L
       fframe.mesh.position.y -= 0.5;
     }
 
     if(event.keyCode == 65) { //A
       fframe.mesh.rotation.y += 0.1;
     }
-    else if(event.keyCode == 68) { //D
+    if(event.keyCode == 68) { //D
       fframe.mesh.rotation.y -= 0.1;
     }
 
     if(event.keyCode == 87) { //W
       fframe.mesh.rotation.x += 0.1;
     }
-    else if(event.keyCode == 83) { //S
+    if(event.keyCode == 83) { //S
       fframe.mesh.rotation.x -= 0.1;
     }
     if(event.keyCode == 81) { //Q
       fframe.mesh.rotation.z += 0.1;
     }
-    else if(event.keyCode == 69) { //E
+    
+    if(event.keyCode == 69) { //E
       fframe.mesh.rotation.z -= 0.1;
     }
     if(event.keyCode == 73) { //i
@@ -208,7 +187,7 @@ document.addEventListener('keydown', function(event) {
       fframe.mesh.scale.x += 0.1;
       fframe.mesh.scale.y += 0.1;
     }
-    else if(event.keyCode == 75) { //k
+    if(event.keyCode == 75) { //k
       fframe.mesh.scale.z -= 0.1;
       fframe.mesh.scale.x -= 0.1;
       fframe.mesh.scale.y -= 0.1;
