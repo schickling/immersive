@@ -57,10 +57,10 @@ document.body.appendChild(element);
 //var leftBuffer = renderTarget;
 //var rightBuffer = renderTarget.clone();
 
+var place = location.hash ? Places[location.hash.substring(2)] : Places.auditorium;
 
-
-var leftTexture = THREE.ImageUtils.loadTexture('images/left.jpg');
-var rightTexture = THREE.ImageUtils.loadTexture('images/right.jpg');
+var leftTexture = THREE.ImageUtils.loadTexture(place.left);
+var rightTexture = THREE.ImageUtils.loadTexture(place.right);
 
 var material = new THREE.MeshBasicMaterial({
   map: leftTexture
@@ -103,6 +103,20 @@ function resize() {
 
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
+
+  hmdOptions = {
+    hResolution : dprWidth,
+    vResolution : dprHeight,
+    hScreenSize: 0.14976,
+    vScreenSize: 0.0936,
+    interpupillaryDistance: 0.064,
+    lensSeparationDistance: 0.064,
+    eyeToScreenDistance: 0.041,
+    distortionK : [1.0, 0.22, 0.24, 0.0],
+    chromaAbParameter: [ 0.996, -0.004, 1.014, 0.0]
+  };
+
+  effect.setHMD(hmdOptions);
 
   effect.setSize(dprWidth, dprHeight);
 
