@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>Immersive</title>
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="vendor/bootstrap-theme.min.css" type="text/css" charset="utf-8">
+    <link rel="stylesheet" href="css/selection.css" type="text/css" charset="utf-8">
+</head>
+
+<body>
+    <div class="container" ng-controller="SelectionController">
+        <div class="page-header">
+            <h1>Example page header <small>Subtext for header</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-xs-6" ng-repeat="(placeId, place) in places">
+                <a ng-href="/#/{{ placeId }}">
+                    <div class="thumbnail">
+                        <img class="img-rounded" ng-src="{{ place.left }}" alt="...">
+                        <div class="caption">
+                            <h3>{{ place.name }}</h3> 
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script src="vendor/angular.min.js"></script>
+    <script src="js/places.js"></script>
+    <script src="js/selection.js"></script>
+</body>
+
+</html>
