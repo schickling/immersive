@@ -5,7 +5,7 @@ THREE.StereoPipeline = function(renderer, dpr, width, height) {
 
   this.setSize(dpr, width, height);
 
-  oCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  oCamera = new THREE.OrthographicCamera(-0.8, 0.8, 0.8, -0.8, 0, 1);
   oScene = new THREE.Scene();
 
   var shader = THREE.BarrelDistortionShader;
