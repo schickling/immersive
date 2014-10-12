@@ -19,7 +19,7 @@
 <body>
     <div ng-controller="SelectionController">
         <div class="tile" ng-click="select(placeId)" ng-repeat="(placeId, place) in places">
-            <img ng-src="{{ ::place.left }}" alt="...">
+            <img ng-src="{{ ::place.thumbnail }}" alt="">
             <div class="caption">
                 <h2>{{ ::place.name }}</h2>
             </div>
