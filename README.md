@@ -1,4 +1,4 @@
-room-tour
+immersive
 =========
 
 Virtual room tour using Google Cardboard
