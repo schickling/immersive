@@ -1,4 +1,4 @@
-var DEBUG = false;
+var DEBUG = true;
 
 var dpr = Math.min(window.devicePixelRatio || 1, 2);
 var width = window.innerWidth;
@@ -64,6 +64,7 @@ for (var i = place.frames.length - 1; i >= 0; i--) {
   frameMesh.positionRight = new THREE.Vector3(frame.positionR[0], frame.positionR[1], frame.positionR[2]);
   frameMesh.rotationRight = new THREE.Euler(frame.rotationR[0], frame.rotationR[1], frame.rotationR[2], "XYZ");
   frameMesh.scaleRight = new THREE.Vector3(frame.scaleR[0], frame.scaleR[1], frame.scaleR[2]);
+  frameMesh.aniDelay = frame.aniDelay;
 
   meshes.push(frameMesh);
   fframe = frameMesh;
@@ -79,8 +80,7 @@ if (DEBUG) {
   controls = new THREE.OrbitControls(camera);
   controls.noPan = true;
   controls.noZoom = true;
-  controls.autoRotate = true;
-  controls.autoRotateSpeed = 0.5;
+  controls.autoRotate = false;
 
   document.addEventListener('keydown', moveFrame, false);
 } else {

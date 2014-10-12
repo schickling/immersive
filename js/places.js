@@ -5,13 +5,14 @@ var Places = {
     name: "Auditorium",
     frames: [{
       left: ["images/auditorium/single_left.jpg", "images/auditorium/single_left2.jpg"],
-      right: ["images/auditorium/single_right.jpg", "images/auditorium/single_right2.jpg"],
-      scaleL: [0.7, 0.7, 0.7],
-      positionL: [6.5, -7.5, 11],
-      rotationL: [-5.8, -2.8, 0.1],
-      scaleR: [0.9, 0.9, 0.89],
-      positionR: [6.5, -9.5, 13.5],
-      rotationR: [-5.7, -2.9, 0]
+      right: ["images/auditorium/single_left.jpg", "images/auditorium/single_left2.jpg"],
+      scaleL: [0.6, 0.6, 0.6],
+      positionL: [-60, 2.5, 45],
+      rotationL: [-5.7, -4.49, -0.6],
+      scaleR: [0.6, 0.6, 0.6],
+      positionR: [-49, 4.5, 46.5],
+      rotationR: [-5.7, -4.49, -0.6],
+	  aniDelay: 130
     }],
     thumbnail: "images/auditorium/thumb.jpg"
   },
