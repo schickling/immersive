@@ -6,8 +6,8 @@ angular.module('app', [])
     $scope.places = Places;
 
     $scope.select = function(placeId) {
-      location.hash = '#/' + placeId;
-      location.pathname = location.pathname.split('/').slice(0, -1).join('/');
+      history.pushState(null, document.title, location.pathname.split('/').slice(0, -1).join('/') + '/#/' + placeId);
+      location.reload();
     };
 
   });
