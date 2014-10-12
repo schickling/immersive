@@ -1,13 +1,12 @@
 angular.module('app', [])
   .controller('SelectionController', function($scope) {
 
-    history.pushState(null, document.title, window.location.pathname);
+    if (~location.href.indexOf('#')) location.href = location.href.replace(location.hash, '');
 
     $scope.places = Places;
 
     $scope.select = function(placeId) {
-      history.pushState(null, document.title, location.pathname.split('/').slice(0, -1).join('/') + '/#/' + placeId);
-      location.reload();
+      location.href = location.origin + location.pathname.split('/').slice(0, -1).join('/') + '/#/' + placeId;
     };
 
   });
