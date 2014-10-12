@@ -64,5 +64,19 @@ var Places = {
     name: "Strange Hall",
     frames: [],
     thumbnail: "images/hall/thumb.jpg"
+  },
+  schiffbau: {
+    left: "images/schiffbau/left.jpg",
+    right: "images/schiffbau/right.jpg",
+    name: "Schiffbau",
+    frames: [],
+    thumbnail: "images/schiffbau/thumb.jpg"
+  },
+  hardbruecke: {
+    left: "images/hardbruecke/left.jpg",
+    right: "images/hardbruecke/right.jpg",
+    name: "Hardbrücke",
+    frames: [],
+    thumbnail: "images/hardbruecke/thumb.jpg"
   }
 }
