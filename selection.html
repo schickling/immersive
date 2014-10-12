@@ -18,11 +18,11 @@
 
 <body>
     <div ng-controller="SelectionController">
-        <div class="tile" ng-repeat="(placeId, place) in places">
-            <a ng-href="/#/{{ placeId }}">
-                <img ng-src="{{ place.left }}" alt="...">
-                <div class="caption"><h2>{{ place.name }}</h2></div>
-            </a>
+        <div class="tile" ng-click="select(placeId)" ng-repeat="(placeId, place) in places">
+            <img ng-src="{{ ::place.left }}" alt="...">
+            <div class="caption">
+                <h2>{{ ::place.name }}</h2>
+            </div>
         </div>
     </div>
     <script src="vendor/angular.min.js"></script>
