@@ -1,7 +1,7 @@
 immersive
 =========
 
-Virtual room tour using Google Cardboard
+Virtual room tour using Google Cardboard based on [three-vr](http://github.com/schickling/three-vr)
 
 ## Demo
 
