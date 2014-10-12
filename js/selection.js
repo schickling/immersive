@@ -3,5 +3,4 @@ angular.module('app', [])
 
     $scope.places = Places;
 
-
   });

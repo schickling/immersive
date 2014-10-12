@@ -23,7 +23,9 @@ renderer.setSize(width, height);
 var meshes = [];
 
 var placeId = location.hash.replace(/[#,\/]*/, '');
-if (!placeId) location.url = '/selection.html';
+if (!placeId || !Places.hasOwnProperty(placeId)) {
+  location.pathname = location.pathname.split('/').slice(0, -1).join('/') + '/selection.html';
+}
 var place = Places[placeId];
 
 var leftTexture = [THREE.ImageUtils.loadTexture(place.left)];
@@ -47,10 +49,6 @@ for (var i = place.frames.length - 1; i >= 0; i--) {
     left.push(THREE.ImageUtils.loadTexture(frame.left[tex]));
   }
   var right = [];
-
-  var middle = {
-
-  }
 
   for (var tex in frame.right) {
     right.push(THREE.ImageUtils.loadTexture(frame.right[tex]));
