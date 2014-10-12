@@ -12,7 +12,7 @@ var Places = {
       scaleR: [0.6, 0.6, 0.6],
       positionR: [-49, 4.5, 46.5],
       rotationR: [-5.7, -4.49, -0.6],
-	  aniDelay: 130
+      aniDelay: 130
     }],
     thumbnail: "images/auditorium/thumb.jpg"
   },
@@ -37,13 +37,13 @@ var Places = {
   //  frames: [],
   //  thumbnail: "images/hackzurich/thumb.jpg"
   //},
-  belmorepark: {
-    left: "images/belmorepark/left.jpg",
-    right: "images/belmorepark/right.jpg",
-    name: "Belmorepark",
-    frames: [],
-    thumbnail: "images/belmorepark/thumb.jpg"
-  },
+  //belmorepark: {
+  //left: "images/belmorepark/left.jpg",
+  //right: "images/belmorepark/right.jpg",
+  //name: "Belmorepark",
+  //frames: [],
+  //thumbnail: "images/belmorepark/thumb.jpg"
+  //},
   technoparknight: {
     left: "images/technoparknight/left.jpg",
     right: "images/technoparknight/right.jpg",
@@ -65,38 +65,40 @@ var Places = {
     frames: [],
     thumbnail: "images/hall/thumb.jpg"
   },
-  schiffbau: {
-    left: "images/schiffbau/left.jpg",
-    right: "images/schiffbau/right.jpg",
-    name: "Schiffbau",
-    frames: [],
-    thumbnail: "images/schiffbau/thumb.jpg"
-  },
+  //schiffbau: {
+  //left: "images/schiffbau/left.jpg",
+  //right: "images/schiffbau/right.jpg",
+  //name: "Schiffbau",
+  //frames: [],
+  //thumbnail: "images/schiffbau/thumb.jpg"
+  //},
   hardbruecke: {
     left: "images/hardbruecke/left.jpg",
     right: "images/hardbruecke/right.jpg",
-    name: "Hardbrücke", 
+    name: "Hardbrücke",
     frames: [{
-      left: ["images/hardbruecke/ani0.jpg", 
-              "images/hardbruecke/ani1.jpg", 
-              "images/hardbruecke/ani2.jpg", 
-              "images/hardbruecke/ani3.jpg", 
-              "images/hardbruecke/ani4.jpg", 
-              "images/hardbruecke/ani5.jpg", 
-              "images/hardbruecke/ani6.jpg", 
-              "images/hardbruecke/ani7.jpg", 
-              "images/hardbruecke/ani8.jpg", 
-              "images/hardbruecke/ani9.jpg"],
-       right: ["images/hardbruecke/ani0.jpg", 
-              "images/hardbruecke/ani1.jpg", 
-              "images/hardbruecke/ani2.jpg", 
-              "images/hardbruecke/ani3.jpg", 
-              "images/hardbruecke/ani4.jpg", 
-              "images/hardbruecke/ani5.jpg", 
-              "images/hardbruecke/ani6.jpg", 
-              "images/hardbruecke/ani7.jpg", 
-              "images/hardbruecke/ani8.jpg", 
-              "images/hardbruecke/ani9.jpg"],
+      left: ["images/hardbruecke/ani0.jpg",
+        "images/hardbruecke/ani1.jpg",
+        "images/hardbruecke/ani2.jpg",
+        "images/hardbruecke/ani3.jpg",
+        "images/hardbruecke/ani4.jpg",
+        "images/hardbruecke/ani5.jpg",
+        "images/hardbruecke/ani6.jpg",
+        "images/hardbruecke/ani7.jpg",
+        "images/hardbruecke/ani8.jpg",
+        "images/hardbruecke/ani9.jpg"
+      ],
+      right: ["images/hardbruecke/ani0.jpg",
+        "images/hardbruecke/ani1.jpg",
+        "images/hardbruecke/ani2.jpg",
+        "images/hardbruecke/ani3.jpg",
+        "images/hardbruecke/ani4.jpg",
+        "images/hardbruecke/ani5.jpg",
+        "images/hardbruecke/ani6.jpg",
+        "images/hardbruecke/ani7.jpg",
+        "images/hardbruecke/ani8.jpg",
+        "images/hardbruecke/ani9.jpg"
+      ],
 
       scaleL: [2.0, 2.0, 2.0],
       positionL: [-59, 10.0, 40],
@@ -104,7 +106,7 @@ var Places = {
       scaleR: [2.0, 2.0, 2.0],
       positionR: [-52.5, 11.5, 47],
       rotationR: [-6.4, -3.7, 0.1],
-    aniDelay: 20
+      aniDelay: 20
     }],
     thumbnail: "images/hardbruecke/thumb.jpg"
   }
