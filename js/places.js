@@ -75,8 +75,37 @@ var Places = {
   hardbruecke: {
     left: "images/hardbruecke/left.jpg",
     right: "images/hardbruecke/right.jpg",
-    name: "Hardbrücke",
-    frames: [],
+    name: "Hardbrücke", 
+    frames: [{
+      left: ["images/hardbruecke/ani0.jpg", 
+              "images/hardbruecke/ani1.jpg", 
+              "images/hardbruecke/ani2.jpg", 
+              "images/hardbruecke/ani3.jpg", 
+              "images/hardbruecke/ani4.jpg", 
+              "images/hardbruecke/ani5.jpg", 
+              "images/hardbruecke/ani6.jpg", 
+              "images/hardbruecke/ani7.jpg", 
+              "images/hardbruecke/ani8.jpg", 
+              "images/hardbruecke/ani9.jpg"],
+       right: ["images/hardbruecke/ani0.jpg", 
+              "images/hardbruecke/ani1.jpg", 
+              "images/hardbruecke/ani2.jpg", 
+              "images/hardbruecke/ani3.jpg", 
+              "images/hardbruecke/ani4.jpg", 
+              "images/hardbruecke/ani5.jpg", 
+              "images/hardbruecke/ani6.jpg", 
+              "images/hardbruecke/ani7.jpg", 
+              "images/hardbruecke/ani8.jpg", 
+              "images/hardbruecke/ani9.jpg"],
+
+      scaleL: [2.0, 2.0, 2.0],
+      positionL: [-59, 10.0, 40],
+      rotationL: [-6.4, -3.7, 0.1],
+      scaleR: [2.0, 2.0, 2.0],
+      positionR: [-52.5, 11.5, 47],
+      rotationR: [-6.4, -3.7, 0.1],
+    aniDelay: 20
+    }],
     thumbnail: "images/hardbruecke/thumb.jpg"
   }
 }
