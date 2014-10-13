@@ -1,4 +1,4 @@
-var DEBUG = !bowser.mobile;
+var supportsDeviceOrientation = false; //Former DBUG flag. 
 
 var dpr = Math.min(window.devicePixelRatio || 1, 2);
 var width = window.innerWidth;
@@ -74,21 +74,38 @@ meshes.forEach(function(m) {
 
 var controls;
 
-if (DEBUG) {
-  controls = new THREE.OrbitControls(camera);
-  controls.noPan = true;
-  controls.noZoom = true;
-  controls.autoRotate = false;
+var interval; 
 
-  document.addEventListener('keydown', moveFrame, false);
-} else {
-  controls = new THREE.DeviceOrientationControls(camera, true);
-  controls.connect();
-  controls.update();
-
-  window.addEventListener('click', toggleFullscreen, false);
-  window.addEventListener('touchmove', reload, false);
+var deviceOrientationCheck = function(event) {
+  if(event.alpha) {
+    supportsDeviceOrientation = true;
+    window.removeEventListener('deviceorientation', deviceOrientationCheck, false);
+  }
 }
+
+window.addEventListener('deviceorientation', deviceOrientationCheck, false);
+
+var controlInitialization = function() {
+  if (supportsDeviceOrientation) {
+    controls = new THREE.DeviceOrientationControls(camera, true);
+    controls.connect();
+    controls.update();
+
+    window.addEventListener('click', toggleFullscreen, false);
+    window.addEventListener('touchmove', reload, false);
+  } else {
+    controls = new THREE.OrbitControls(camera);
+    controls.noPan = true;
+    controls.noZoom = true;
+    controls.autoRotate = false;
+
+    document.addEventListener('keydown', moveFrame, false);
+  }
+
+  window.clearInterval(interval)
+}
+
+interval = window.setInterval(controlInitialization, 1000);
 
 var leftPrerender = function() {
   for (var i = meshes.length - 1; i >= 0; i--) {
@@ -105,7 +122,9 @@ var rightPrerender = function() {
 render();
 
 function render() {
-  controls.update();
+  if(controls) {
+    controls.update();
+  }
   pipeline.render(scene, camera, leftPrerender, rightPrerender);
   requestAnimationFrame(render);
 }
