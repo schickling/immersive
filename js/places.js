@@ -58,13 +58,13 @@ var Places = {
   //  frames: [],
   //  thumbnail: "images/technoparknight2/thumb.jpg"
   //},
-  hall: {
-    left: "images/hall/left.jpg",
-    right: "images/hall/right.jpg",
-    name: "Strange Hall",
-    frames: [],
-    thumbnail: "images/hall/thumb.jpg"
-  },
+  //hall: {
+  //left: "images/hall/left.jpg",
+  //right: "images/hall/right.jpg",
+  //name: "Strange Hall",
+  //frames: [],
+  //thumbnail: "images/hall/thumb.jpg"
+  //},
   //schiffbau: {
   //left: "images/schiffbau/left.jpg",
   //right: "images/schiffbau/right.jpg",
