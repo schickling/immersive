@@ -52,11 +52,11 @@ var Places = {
     thumbnail: "images/technoparknight/thumb.jpg"
   },
   ehrenhof: {
-    left: "images/ehrenhof/left.jpg",
-    right: "images/ehrenhof/right.jpg",
+    left: "images/ehrenhof_rainy/left.jpg",
+    right: "images/ehrenhof_rainy/right.jpg",
     name: "KIT Ehrenhof",
     frames: [],
-    thumbnail: "images/ehrenhof/thumb.jpg"
+    thumbnail: "images/ehrenhof_rainy/thumb.jpg"
   },
   schloss: {
     left: "images/schloss/left.jpg",
