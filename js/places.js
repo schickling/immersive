@@ -58,6 +58,13 @@ var Places = {
     frames: [],
     thumbnail: "images/ehrenhof/thumb.jpg"
   },
+  schloss: {
+    left: "images/schloss/left.jpg",
+    right: "images/schloss/right.jpg",
+    name: "Karlsruhe Schloss",
+    frames: [],
+    thumbnail: "images/schloss/thumb.jpg"
+  },
   //technoparknight2: {
   //  left: "images/technoparknight2/left.jpg",
   //  right: "images/technoparknight2/right.jpg",
