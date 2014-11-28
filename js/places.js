@@ -30,10 +30,10 @@
     frames: [],
     thumbnail: "images/technopark/thumb.jpg"
   },
-  Fußballfeld: {
+  Fussballfeld: {
     left: "images/fussballfeld/left.jpg",
     right: "images/fussballfeld/right.jpg",
-    name: "Fußballfeld",
+    name: "Fussballfeld",
     frames: [],
     thumbnail: "images/technopark/thumb.jpg"
   },
