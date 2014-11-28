@@ -1,4 +1,4 @@
-var Places = {
+﻿var Places = {
   auditorium: {
     left: "images/auditorium/left.jpg",
     right: "images/auditorium/right.jpg",
@@ -20,6 +20,20 @@ var Places = {
     left: "images/technopark/left.jpg",
     right: "images/technopark/right.jpg",
     name: "Technopark",
+    frames: [],
+    thumbnail: "images/technopark/thumb.jpg"
+  },
+  zimmer: {
+    left: "images/zimmer/left.jpg",
+    right: "images/zimmer/right.jpg",
+    name: "Zimmer",
+    frames: [],
+    thumbnail: "images/technopark/thumb.jpg"
+  },
+  Fußballfeld: {
+    left: "images/fussballfeld/left.jpg",
+    right: "images/fussballfeld/right.jpg",
+    name: "Fußballfeld",
     frames: [],
     thumbnail: "images/technopark/thumb.jpg"
   },
