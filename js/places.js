@@ -35,7 +35,7 @@
     right: "images/fussballfeld/right.jpg",
     name: "Fussballfeld",
     frames: [],
-    thumbnail: "images/technopark/thumb.jpg"
+    thumbnail: "images/fussballfeld/thumb.jpg"
   },
   swisscom: {
     left: "images/swisscom/left.jpg",
