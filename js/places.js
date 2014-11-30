@@ -16,6 +16,13 @@
     }],
     thumbnail: "images/auditorium/thumb.jpg"
   },
+  dom: {
+    left: "images/dom/domleft.jpg",
+    right: "images/dom/domright.jpg",
+    name: "Aachener Dom",
+    frames: [],
+    thumbnail: "images/dom/thumb.jpg"
+  },
   technopark: {
     left: "images/technopark/left.jpg",
     right: "images/technopark/right.jpg",
@@ -28,14 +35,7 @@
     right: "images/zimmer/right.jpg",
     name: "Zimmer",
     frames: [],
-    thumbnail: "images/technopark/thumb.jpg"
-  },
-  Fussballfeld: {
-    left: "images/fussballfeld/left.jpg",
-    right: "images/fussballfeld/right.jpg",
-    name: "Fussballfeld",
-    frames: [],
-    thumbnail: "images/fussballfeld/thumb.jpg"
+    thumbnail: "images/zimmer/thumb.jpg"
   },
   swisscom: {
     left: "images/swisscom/left.jpg",
@@ -43,6 +43,13 @@
     name: "Swisscom",
     frames: [],
     thumbnail: "images/swisscom/thumb.jpg"
+  },
+  fussballfeld: {
+    left: "images/fussballfeld/left.jpg",
+    right: "images/fussballfeld/right.jpg",
+    name: "Fussballfeld",
+    frames: [],
+    thumbnail: "images/fussballfeld/thumb.jpg"
   },
   //hackzurich: {
   //  left: "images/hackzurich/left.jpg",
