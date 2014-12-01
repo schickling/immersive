@@ -51,6 +51,13 @@
     frames: [],
     thumbnail: "images/fussballfeld/thumb.jpg"
   },
+  tamedia: {
+    left: "images/tamedia/left.jpg",
+    right: "images/tamedia/right.jpg",
+    name: "Tamedia Welcome Hall",
+    frames: [],
+    thumbnail: "images/tamedia/thumb.jpg"
+  },
   //hackzurich: {
   //  left: "images/hackzurich/left.jpg",
   //  right: "images/hackzurich/right.jpg",
