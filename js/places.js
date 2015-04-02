@@ -93,13 +93,6 @@
         frames: [],
         thumbnail: "images/schloss/thumb.jpg"
     },
-    dessert: {
-        left: "images/dessert/left.jpg",
-        right: "images/dessert/right.jpg",
-        name: "Dessert",
-        frames: [],
-        thumbnail: "images/dessert/thumb.jpg"
-    },
     //technoparknight2: {
     //  left: "images/technoparknight2/left.jpg",
     //  right: "images/technoparknight2/right.jpg",
