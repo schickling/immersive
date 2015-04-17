@@ -58,7 +58,7 @@
         frames: [],
         thumbnail: "images/tamedia/thumb.jpg"
     },
-    tamedia: {
+    timessquare: {
         left: "images/timessquare/left.jpg",
         right: "images/timessquare/right.jpg",
         name: "Times Square",
