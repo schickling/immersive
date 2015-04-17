@@ -58,6 +58,13 @@
         frames: [],
         thumbnail: "images/tamedia/thumb.jpg"
     },
+    tamedia: {
+        left: "images/timessquare/left.jpg",
+        right: "images/timessquare/right.jpg",
+        name: "Times Square",
+        frames: [],
+        thumbnail: "images/timessquare/thumb.jpg"
+    },
     //hackzurich: {
     //  left: "images/hackzurich/left.jpg",
     //  right: "images/hackzurich/right.jpg",
